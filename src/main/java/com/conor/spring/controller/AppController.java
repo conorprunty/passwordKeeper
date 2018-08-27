@@ -1,5 +1,7 @@
 package com.conor.spring.controller;
 
+import java.util.Locale;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,7 +37,7 @@ public class AppController {
 	public String homePage(ModelMap model) {
 		return "index";
 	}
-	
+
 	@RequestMapping(value = { "/temp" }, method = RequestMethod.GET)
 	public String tempPage(ModelMap model) {
 		return "temp";
@@ -53,6 +56,13 @@ public class AppController {
 	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
+			return "registration";
+		}
+
+		if (!userService.isUserUnique(user.getId(), user.getName())) {
+			FieldError uniqueNameError = new FieldError("user", "name",
+					messageSource.getMessage("non.unique.name", new String[] { user.getName() }, Locale.getDefault()));
+			result.addError(uniqueNameError);
 			return "registration";
 		}
 

@@ -1,0 +1,13 @@
+com\conor\spring\configuration\HibernateConfiguration.class
+com\conor\spring\security\CustomUserDetailsService.class
+com\conor\spring\controller\AppController.class
+com\conor\spring\dao\UserDaoImpl.class
+com\conor\spring\service\UserServiceImpl.class
+com\conor\spring\configuration\AppInitializer.class
+com\conor\spring\model\User.class
+com\conor\spring\dao\UserDao.class
+com\conor\spring\service\UserService.class
+com\conor\spring\configuration\AppConfig.class
+com\conor\spring\security\SecurityConfiguration.class
+com\conor\spring\dao\AbstractDao.class
+com\conor\spring\security\SecurityWebApplicationInitializer.class

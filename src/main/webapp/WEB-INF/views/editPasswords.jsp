@@ -50,5 +50,7 @@
             </tr>
         </table>
     </form:form>
+    <br>
+    <br><a href="<c:url value='/passwords' />">Cancel</a>
 </body>
 </html>

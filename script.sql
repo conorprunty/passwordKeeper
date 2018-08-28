@@ -10,5 +10,6 @@ CREATE TABLE PASSWORDS(
     system VARCHAR(50) NOT NULL,
     user VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
+    account VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );

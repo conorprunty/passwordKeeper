@@ -17,8 +17,8 @@ public class PasswordsServiceImpl implements PasswordsService {
 	private PasswordsDao dao;
 
 	@Override
-	public List<Passwords> findAllPasswords() {
-		return dao.findAllPasswords();
+	public List<Passwords> findAllPasswords(String userName) {
+		return dao.findAllPasswords(userName);
 	}
 
 	@Override

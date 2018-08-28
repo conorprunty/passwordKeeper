@@ -42,7 +42,7 @@
                 <td><form:input path="password" id="password"/></td>
                 <td><form:errors path="password" cssClass="error"/></td>
             </tr>
-     
+     		<form:input type="hidden" path="account" id="account" value="${loggedinuser}"/>
             <tr>
                 <td>
                     <input type="submit" value="Submit"/>

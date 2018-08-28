@@ -54,6 +54,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<form:input type="hidden" path="account" id="account" value="${loggedinuser}"/>
 	
 			<div class="row">
 				<div class="form-actions floatRight">

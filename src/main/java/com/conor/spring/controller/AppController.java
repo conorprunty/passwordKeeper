@@ -78,7 +78,8 @@ public class AppController {
 
 	@RequestMapping(value = { "/passwords" }, method = RequestMethod.GET)
 	public String passwordPage(ModelMap model) {
-		List<Passwords> passwords = pService.findAllPasswords();
+		String userName = getPrincipal();
+		List<Passwords> passwords = pService.findAllPasswords(userName);
 		model.addAttribute("passwords", passwords);
 		return "passwords";
 	}
@@ -86,6 +87,8 @@ public class AppController {
 	@RequestMapping(value = { "/passwords/new" }, method = RequestMethod.GET)
 	public String newPassword(ModelMap model) {
 		Passwords passwords = new Passwords();
+		String userName = getPrincipal();
+		model.addAttribute("userName", userName);
 		model.addAttribute("passwords", passwords);
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -102,7 +105,8 @@ public class AppController {
 		pService.savePasswords(passwords);
 
 		// need to add in all passwords again
-		List<Passwords> allPasswords = pService.findAllPasswords();
+		String userName = getPrincipal();
+		List<Passwords> allPasswords = pService.findAllPasswords(userName);
 		model.addAttribute("passwords", allPasswords);
 		model.addAttribute("success", "Password saved for " + passwords.getSystem());
 		model.addAttribute("loggedinuser", getPrincipal());

@@ -6,7 +6,7 @@ import com.conor.spring.model.Passwords;
 
 public interface PasswordsService {
 
-	List<Passwords> findAllPasswords();
+	List<Passwords> findAllPasswords(String userName);
 
 	void savePasswords(Passwords passwords);
 

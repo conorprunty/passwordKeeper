@@ -21,8 +21,9 @@ public class PasswordsDaoImpl extends AbstractDao<Integer, Passwords> implements
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Passwords> findAllPasswords() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("system"));
+	public List<Passwords> findAllPasswords(String userName) {
+		Criteria criteria = createEntityCriteria().addOrder(Order.asc("system"))
+				.add(Restrictions.eq("account", userName));
 		return criteria.list();
 	}
 

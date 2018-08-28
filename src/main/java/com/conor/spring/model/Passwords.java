@@ -28,6 +28,10 @@ public class Passwords {
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
+	@NotEmpty
+	@Column(name = "ACCOUNT", nullable = false)
+	private String account;
+
 	public int getId() {
 		return id;
 	}
@@ -60,49 +64,12 @@ public class Passwords {
 		this.password = password;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((system == null) ? 0 : system.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
+	public String getAccount() {
+		return account;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Passwords other = (Passwords) obj;
-		if (id != other.id)
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (system == null) {
-			if (other.system != null)
-				return false;
-		} else if (!system.equals(other.system))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Passwords [id=" + id + ", system=" + system + ", user=" + user + ", password=" + password + "]";
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 }

@@ -26,6 +26,9 @@
 	<a href="<c:url value='/passwords/new' />">Add new password</a>
 	<br/>
 	<br/>
+	<a href="<c:url value='/logout' />">Logout</a>
+	<br/>
+	<br/>
 	
 	<table class="sortable" id ="tablestyle">
 		<tr>

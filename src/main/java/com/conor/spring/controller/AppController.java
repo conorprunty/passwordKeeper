@@ -3,6 +3,8 @@ package com.conor.spring.controller;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +151,15 @@ public class AppController {
 		} else {
 			return "redirect:/passwords";
 		}
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			SecurityContextHolder.getContext().setAuthentication(null);
+		}
+		return "redirect:/login?logout";
 	}
 
 	private String getPrincipal() {

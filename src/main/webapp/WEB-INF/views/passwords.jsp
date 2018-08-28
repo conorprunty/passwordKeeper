@@ -35,6 +35,7 @@
 			<td>${passwords.system}</td>
 			<td>${passwords.user}</td>
 			<td>${passwords.password}</td>
+			<td><a href="<c:url value='/passwords/edit-password-${passwords.id}' />" class="btn btn-success custom-width" >Edit</a></td>
 			<td><a href="<c:url value='/passwords/delete-${passwords.id}' />" class="btn btn-danger custom-width" onclick="return confirm('Are you sure?')" >Delete</a></td>
 			</tr>
 		</c:forEach>

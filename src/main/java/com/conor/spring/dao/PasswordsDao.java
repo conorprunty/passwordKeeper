@@ -11,4 +11,6 @@ public interface PasswordsDao {
 	void savePasswords(Passwords passwords);
 	
 	void deleteById(int id);
+	
+	Passwords findById(int id);
 }

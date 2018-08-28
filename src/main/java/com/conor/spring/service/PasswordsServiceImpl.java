@@ -25,9 +25,24 @@ public class PasswordsServiceImpl implements PasswordsService {
 	public void savePasswords(Passwords passwords) {
 		dao.savePasswords(passwords);
 	}
-	
+
 	@Override
 	public void deletePasswordsById(int id) {
 		dao.deleteById(id);
+	}
+
+	@Override
+	public Passwords findById(int id) {
+		return dao.findById(id);
+	}
+
+	@Override
+	public void updatePasswords(Passwords passwords) {
+		Passwords entity = dao.findById(passwords.getId());
+		if (entity != null) {
+			entity.setSystem(passwords.getSystem());
+			entity.setUser(passwords.getUser());
+			entity.setPassword(passwords.getPassword());
+		}
 	}
 }

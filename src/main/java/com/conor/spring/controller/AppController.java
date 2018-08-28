@@ -115,6 +115,29 @@ public class AppController {
 		return "redirect:/passwords";
 	}
 
+	@RequestMapping(value = { "/passwords/edit-password-{id}" }, method = RequestMethod.GET)
+	public String editPasswords(@PathVariable int id, ModelMap model) {
+		Passwords passwords = pService.findById(id);
+		model.addAttribute("passwords", passwords);
+		model.addAttribute("edit", true);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "editPasswords";
+	}
+
+	@RequestMapping(value = { "/passwords/edit-password-{id}" }, method = RequestMethod.POST)
+	public String updatePassword(@Valid Passwords passwords, BindingResult result, ModelMap model,
+			@PathVariable int id) {
+
+		if (result.hasErrors()) {
+			return "editPasswords";
+		}
+
+		pService.updatePasswords(passwords);
+		model.addAttribute("success", "Password updated for " + passwords.getSystem());
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "redirect:/passwords";
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() {
 		if (isCurrentAuthenticationAnonymous()) {

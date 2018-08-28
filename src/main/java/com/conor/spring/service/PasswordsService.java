@@ -6,9 +6,13 @@ import com.conor.spring.model.Passwords;
 
 public interface PasswordsService {
 
-	List<Passwords> findAllPasswords(); 
-	
+	List<Passwords> findAllPasswords();
+
 	void savePasswords(Passwords passwords);
-	
+
 	void deletePasswordsById(int id);
+
+	Passwords findById(int id);
+
+	void updatePasswords(Passwords passwords);
 }

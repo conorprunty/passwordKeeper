@@ -1,5 +1,6 @@
 package com.conor.spring.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -14,10 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.conor.spring.model.Passwords;
 import com.conor.spring.model.User;
+import com.conor.spring.service.PasswordsService;
 import com.conor.spring.service.UserService;
 
 @Controller
@@ -31,16 +35,14 @@ public class AppController {
 	UserService userService;
 
 	@Autowired
+	PasswordsService pService;
+
+	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
 
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		return "index";
-	}
-
-	@RequestMapping(value = { "/temp" }, method = RequestMethod.GET)
-	public String tempPage(ModelMap model) {
-		return "temp";
 	}
 
 	@RequestMapping(value = { "/registration" }, method = RequestMethod.GET)
@@ -70,7 +72,47 @@ public class AppController {
 
 		model.addAttribute("success", "User " + user.getName() + " registered successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
+
 		return "registrationsuccess";
+	}
+
+	@RequestMapping(value = { "/passwords" }, method = RequestMethod.GET)
+	public String passwordPage(ModelMap model) {
+		List<Passwords> passwords = pService.findAllPasswords();
+		model.addAttribute("passwords", passwords);
+		return "passwords";
+	}
+
+	@RequestMapping(value = { "/passwords/new" }, method = RequestMethod.GET)
+	public String newPassword(ModelMap model) {
+		Passwords passwords = new Passwords();
+		model.addAttribute("passwords", passwords);
+		model.addAttribute("edit", false);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "addnewpassword";
+	}
+
+	@RequestMapping(value = { "/passwords/new" }, method = RequestMethod.POST)
+	public String savePassword(@Valid Passwords passwords, BindingResult result, ModelMap model) {
+
+		if (result.hasErrors()) {
+			return "addnewpassword";
+		}
+
+		pService.savePasswords(passwords);
+
+		// need to add in all passwords again
+		List<Passwords> allPasswords = pService.findAllPasswords();
+		model.addAttribute("passwords", allPasswords);
+		model.addAttribute("success", "Password saved for " + passwords.getSystem());
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "passwords";
+	}
+
+	@RequestMapping(value = { "/passwords/delete-{id}" }, method = RequestMethod.GET)
+	public String deletePassword(@PathVariable int id) {
+		pService.deletePasswordsById(id);
+		return "redirect:/passwords";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -78,7 +120,7 @@ public class AppController {
 		if (isCurrentAuthenticationAnonymous()) {
 			return "login";
 		} else {
-			return "redirect:/temp";
+			return "redirect:/passwords";
 		}
 	}
 

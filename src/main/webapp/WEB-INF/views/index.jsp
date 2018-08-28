@@ -14,7 +14,7 @@
 
 
 <body>
-	<h1 align="center"><a href='login'>Login</a></h1>
+	<h1 align="center"><a href='passwords'>Login</a></h1>
 	<h1 align="center"><a href='registration'>Registration</a></h1>
 </body>
 </html>

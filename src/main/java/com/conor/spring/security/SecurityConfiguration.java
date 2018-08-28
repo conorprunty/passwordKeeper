@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/temp/**")
+		http.authorizeRequests().antMatchers("/passwords/**")
 		.access("hasRole('ROLE_TEMP')").antMatchers("*/**").permitAll().and().formLogin().loginPage("/login")
 				.loginProcessingUrl("/login").usernameParameter("name").passwordParameter("password").and().csrf().and()
 				.exceptionHandling().accessDeniedPage("/Access_Denied");

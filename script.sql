@@ -4,3 +4,11 @@ create table USER (
    password VARCHAR(100) NOT NULL,
    PRIMARY KEY (id)
 );
+
+CREATE TABLE PASSWORDS(
+    id INT NOT NULL auto_increment, 
+    system VARCHAR(50) NOT NULL,
+    user VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
